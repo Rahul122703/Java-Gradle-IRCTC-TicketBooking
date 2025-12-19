@@ -1,10 +1,10 @@
 [
   {
-    "name": "Express Train",
-    "trainId": "bacs",
-    "trainNo": "12345",
-    "departTime": "13:50:00",
-    "arrivalTime": "13:50:00",
+    "name": "Gorakhpur Express",
+    "trainId": "gkpExp01",
+    "trainNo": "15017",
+    "departTime": "21:30:00",
+    "arrivalTime": "14:45:00",
     "seats": [
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
@@ -12,17 +12,18 @@
       [0, 0, 0, 0, 0, 0]
     ],
     "timing": {
-      "bangalore": "13:50:00",
-      "jaipur": "13:50:00",
-      "delhi": "13:50:00"
+      "gorakhpur": "21:30:00",
+      "kushinagar": "22:20:00",
+      "lucknow": "06:10:00",
+      "delhi": "14:45:00"
     }
   },
   {
-    "name": "Express Train",
-    "trainId": "bacs",
-    "trainNo": "12345",
-    "departTime": "13:50:00",
-    "arrivalTime": "13:50:00",
+    "name": "Kushinagar Express",
+    "trainId": "ksnExp02",
+    "trainNo": "22537",
+    "departTime": "18:10:00",
+    "arrivalTime": "10:30:00",
     "seats": [
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
@@ -30,9 +31,11 @@
       [0, 0, 0, 0, 0, 0]
     ],
     "timing": {
-      "bangalore": "13:50:00",
-      "jaipur": "13:50:00",
-      "delhi": "13:50:00"
+      "gorakhpur": "18:10:00",
+      "kushinagar": "19:00:00",
+      "varanasi": "22:40:00",
+      "prayagraj": "02:15:00",
+      "delhi": "10:30:00"
     }
   }
 ]
