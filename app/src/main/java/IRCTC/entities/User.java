@@ -1,6 +1,6 @@
 package IRCTC.entities;
 import java.util.*;
-
+//adding a comment here
 public class User {
     private String name;
     private String password;
