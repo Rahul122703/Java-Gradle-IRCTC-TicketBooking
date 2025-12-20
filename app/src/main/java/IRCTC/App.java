@@ -47,14 +47,35 @@ public class App {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Login User selected");
-
-                    System.out.print("Enter Username: ");
+                    System.out.println("\n--- Login to Your Account ---");
+                    System.out.print("Username: ");
+                    String login_userName = sc.next();
+                    System.out.print("Password: ");
+                    String login_uuserPassword = sc.next();
+                    User login_newUser = new User(
+                            login_userName,
+                            login_uuserPassword,
+                            UserServiceUtil.hashPassword(login_uuserPassword),
+                            new ArrayList<>(),
+                            UUID.randomUUID().toString());
+                    try {
+                        UserServices userServices = new UserServices(login_newUser);
+                        Boolean loginStatus = userServices.loginUser();
+                        if (loginStatus) {
+                            System.out.println("Login Sucessful!! + Welcome back" + login_userName);
+                        } else {
+                            System.out.println(
+                                    "Login Failed!! + Invalid Credentials or " + login_userName + " dosen't exist");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("There was some error please try again later");
+                    }
+                case 2:
+                    System.out.println("Sign Up User selected");
+                    System.out.print("Username: ");
                     String userName = sc.next();
-
-                    System.out.print("Enter Password: ");
+                    System.out.print("Password: ");
                     String userPassword = sc.next();
-
                     User newUser = new User(
                             userName,
                             userPassword,
@@ -62,12 +83,8 @@ public class App {
                             new ArrayList<>(),
                             UUID.randomUUID().toString());
                     UserServices.signUpUser(newUser);
-                    System.out.print("Enter Password: ");
-
-                    break;
-
-                case 2:
-                    System.out.println("Sign Up User selected");
+                    System.out.println("\nLogin request submitted successfully.");
+                    System.out.println("Please wait while we verify your credentials...");
                     break;
 
                 case 3:
