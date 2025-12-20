@@ -2,7 +2,6 @@ package IRCTC.entities;
 
 import java.util.*;
 
-//adding a comment here
 public class User {
     private String name;
     private String password;
@@ -10,8 +9,11 @@ public class User {
     private List<Ticket> ticketBooked;
     private String userId;
 
-    public User(String user_name, String user_password, String user_hashPassword, List<Ticket> user_ticketBooked,
-            String user_userId) {
+    public User(String user_name, 
+                String user_password, 
+                String user_hashPassword, 
+                List<Ticket> user_ticketBooked,
+                String user_userId) {
         this.name = user_name;
         this.password = user_password;
         this.hashPasssord = user_hashPassword;
@@ -32,7 +34,7 @@ public class User {
 
     public void printTickets(){
         for(int i = 0 ; i < ticketBooked.size() ; i++){
-            System.out.println(ticketBooked.get(i));
+            System.out.println(ticketBooked.get(i).getTicketInfo());
         }
     }
 

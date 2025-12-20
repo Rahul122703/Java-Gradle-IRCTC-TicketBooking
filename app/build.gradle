@@ -18,6 +18,7 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation libs.junit
+    implementation 'org.mindrot:jbcrypt:0.4'
 
     // This dependency is used by the application.
     implementation libs.guava
