@@ -1,6 +1,8 @@
 package IRCTC;
 
+import IRCTC.entities.Ticket;
 import IRCTC.entities.User;
+import IRCTC.entities.Train;
 import IRCTC.services.TrainServices;
 import IRCTC.services.UserServices;
 import IRCTC.utils.UserServiceUtil;
@@ -9,26 +11,38 @@ import java.util.*;
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
-        System.out.println("--------- TICKET BOOKING APP ---------");
+    public static void waitForEnter(Scanner sc) {
+        System.out.println("\nPress ENTER to continue...");
+        sc.nextLine();
+        sc.nextLine();
+    }
+
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        // UserServices userServices = null;
         UserServices userServices = null;
         User loggedInUser = null;
+
         try {
             TrainServices.setTrains();
         } catch (Exception e) {
-            System.out.println("Error initializing train services." + e.getMessage());
+            System.out.println("Error initializing train services.");
             return;
         }
+
         int choice = 0;
 
         while (choice != 8) {
 
-            System.out.println("\n======================================");
+            clearScreen();
+
+            System.out.println("======================================");
             System.out.println("        WELCOME TO IRCTC APP");
             System.out.println("======================================");
             System.out.println("1. Login User");
@@ -37,8 +51,7 @@ public class App {
             System.out.println("4. View My Bookings");
             System.out.println("5. Search Trains");
             System.out.println("6. Cancel Booking");
-            System.out.println("7. Print All trains");
-
+            System.out.println("7. Print All Trains");
             System.out.println("8. Exit Application");
             System.out.println("======================================");
             System.out.print("Enter your choice: ");
@@ -47,8 +60,10 @@ public class App {
 
             switch (choice) {
 
-                case 1: {
-                    System.out.println("\n--- Login to Your Account ---");
+                case 1 -> {
+                    clearScreen();
+                    System.out.println("--- Login to Your Account ---");
+
                     System.out.print("Username: ");
                     String username = sc.next();
 
@@ -64,105 +79,125 @@ public class App {
 
                     try {
                         userServices = new UserServices(tempUser);
-                        boolean loginStatus = userServices.loginUser();
-
-                        if (loginStatus) {
+                        if (userServices.loginUser()) {
                             loggedInUser = tempUser;
-                            System.out.println("Login Successful! Welcome " + username);
+                            System.out.println("\nLogin successful. Welcome " + username);
                         } else {
-                            System.out.println("Login Failed! Invalid credentials.");
                             userServices = null;
+                            System.out.println("\nInvalid credentials.");
                         }
-
                     } catch (Exception e) {
-                        System.out.println("Login error. Please try again.");
+                        System.out.println("\nLogin error.");
                     }
-                    break;
+
+                    waitForEnter(sc);
                 }
 
-                case 2: {
+                case 2 -> {
+                    clearScreen();
+                    System.out.println("--- Create New Account ---");
+
+                    System.out.print("Choose Username: ");
+                    String username = sc.next();
+
+                    System.out.print("Choose Password: ");
+                    String password = sc.next();
+
+                    User newUser = new User(
+                            username,
+                            password,
+                            UserServiceUtil.hashPassword(password),
+                            new ArrayList<>(),
+                            UUID.randomUUID().toString());
+
                     try {
-                        System.out.println("\n--- Create New Account ---");
-                        System.out.print("Choose Username: ");
-                        String username = sc.next();
-
-                        System.out.print("Choose Password: ");
-                        String password = sc.next();
-
-                        User newUser = new User(
-                                username,
-                                password,
-                                UserServiceUtil.hashPassword(password),
-                                new ArrayList<>(),
-                                UUID.randomUUID().toString());
-
-                        UserServices newUserData = new UserServices(newUser);
-                        boolean signupStatus = newUserData.signUpUser(newUser);
-
-                        if (signupStatus) {
-                            System.out.println("Account created successfully. Please login.");
+                        UserServices us = new UserServices(newUser);
+                        if (us.signUpUser(newUser)) {
+                            System.out.println("\nAccount created successfully.");
                         } else {
-                            System.out.println("Signup failed. Try again.");
+                            System.out.println("\nSignup failed.");
                         }
-
                     } catch (Exception e) {
-                        System.out.println("System error while creating account.");
-                        e.printStackTrace();
+                        System.out.println("\nSystem error.");
                     }
-                    break;
+
+                    waitForEnter(sc);
                 }
 
-                case 3:
+                case 3 -> {
+                    clearScreen();
                     if (loggedInUser == null) {
                         System.out.println("Please login first.");
-                        break;
+                    } else {
+                        System.out.println("Book seat feature coming soon.");
                     }
-                    System.out.println("Book a Seat selected");
-                    break;
+                    waitForEnter(sc);
+                }
 
-                case 4:
+                case 4 -> {
+                    clearScreen();
                     if (loggedInUser == null || userServices == null) {
                         System.out.println("Please login first.");
-                        break;
+                    } else {
+                        userServices.fetchBookings();
                     }
-                    userServices.fetchBookings();
-                    break;
+                    waitForEnter(sc);
+                }
 
-                case 5:
-                    System.out.println("\n==================== TRAIN SEARCH ====================");
-                    System.out.print("Enter Source Station      : ");
+                case 5 -> {
+                    clearScreen();
+                    System.out.println("=== TRAIN SEARCH ===");
+
+                    System.out.print("Enter Source Station: ");
                     String source = sc.next();
 
-                    System.out.print("Enter Destination Station : ");
+                    System.out.print("Enter Destination Station: ");
                     String destination = sc.next();
 
-                    System.out.println("\n--------------- Available Trains ----------------");
-                    System.out.println(UserServices.searchTrains(source, destination));
-                    System.out.println("--------------------------------------------------");
-                    break;
+                    List<Train> trains = UserServices.searchTrains(source, destination);
 
-                case 6:
+                    if (trains.isEmpty()) {
+                        System.out.println("\nNo trains found.");
+                    } else {
+                        for (Train train : trains) {
+                            System.out.println("--------------------------------------------");
+                            System.out.println("Train Name  : " + train.getName());
+                            System.out.println("Train No    : " + train.getTrainNo());
+                            System.out.println("Source      : " + source + " -> " + train.getTiming().get(source));
+                            System.out.println(
+                                    "Destination : " + destination + " -> " + train.getTiming().get(destination));
+                            System.out.println("--------------------------------------------");
+                        }
+                    }
+
+                    waitForEnter(sc);
+                }
+
+                case 6 -> {
+                    clearScreen();
                     if (loggedInUser == null || userServices == null) {
                         System.out.println("Please login first.");
-                        break;
+                    } else {
+                        System.out.print("Enter Ticket ID: ");
+                        String ticketId = sc.next();
+                        userServices.cancelBooking(ticketId);
+                        System.out.println("\nTicket cancelled if it existed.");
                     }
-                    System.out.print("Enter Ticket ID to cancel: ");
-                    String ticketId = sc.next();
-                    userServices.cancelBooking(ticketId);
-                    System.out.println("Booking cancelled (if ticket existed).");
-                    break;
+                    waitForEnter(sc);
+                }
 
-                case 7:
-                    System.out.println("-------------------PRINTING ALL TRAINS--------------------");
+                case 7 -> {
+                    clearScreen();
                     TrainServices.printAllTrains();
-                    break;
+                    waitForEnter(sc);
+                }
 
-                case 8:
-                    System.out.println("Exiting application...");
-                    break;
+                case 8 -> System.out.println("Exiting application...");
 
-                default:
-                    System.out.println("Invalid choice. Please select 1–7.");
+                default -> {
+                    System.out.println("Invalid choice.");
+                    waitForEnter(sc);
+                }
             }
         }
 

@@ -22,8 +22,7 @@ public class Ticket {
             String ticket_trainName,
             String ticket_dateOfTravel,
             Train ticket_train,
-            String ticket_userId
-    ) {
+            String ticket_userId) {
         this.ticketId = ticket_ticketId;
         this.trainNo = ticket_trainNo;
         this.source = ticket_source;
@@ -35,30 +34,85 @@ public class Ticket {
         this.userId = ticket_userId;
     }
 
-    public String getTicketId() { return this.ticketId; }
-    public String getTrainNo() { return this.trainNo; }
-    public String getSource() { return this.source; }
-    public String getDestination() { return this.destination; }
-    public List<Boolean> getSeats() { return this.seats; }
-    public String getTrainName() { return this.trainName; }
-    public String getDateOfTravel() { return this.dateOfTravel; }
-    public Train getTrain() { return this.train; }
-    public String getUserId() { return this.userId; }
+    public Ticket() {
 
-    public void setTicketId(String newTicketId) { this.ticketId = newTicketId; }
-    public void setTrainNo(String newTrainNo) { this.trainNo = newTrainNo; }
-    public void setSource(String newSource) { this.source = newSource; }
-    public void setDestination(String newDestination) { this.destination = newDestination; }
-    public void setSeats(List<Boolean> newSeats) { this.seats = newSeats; }
-    public void setTrainName(String newTrainName) { this.trainName = newTrainName; }
-    public void setDateOfTravel(String newDateOfTravel) { this.dateOfTravel = newDateOfTravel; }
-    public void setTrain(Train newTrain) { this.train = newTrain; }
-    public void setUserId(String newUserId) { this.userId = newUserId; }
+    }
+
+    public String getTicketId() {
+        return this.ticketId;
+    }
+
+    public String getTrainNo() {
+        return this.trainNo;
+    }
+
+    public String getSource() {
+        return this.source;
+    }
+
+    public String getDestination() {
+        return this.destination;
+    }
+
+    public List<Boolean> getSeats() {
+        return this.seats;
+    }
+
+    public String getTrainName() {
+        return this.trainName;
+    }
+
+    public String getDateOfTravel() {
+        return this.dateOfTravel;
+    }
+
+    public Train getTrain() {
+        return this.train;
+    }
+
+    public String getUserId() {
+        return this.userId;
+    }
+
+    public void setTicketId(String newTicketId) {
+        this.ticketId = newTicketId;
+    }
+
+    public void setTrainNo(String newTrainNo) {
+        this.trainNo = newTrainNo;
+    }
+
+    public void setSource(String newSource) {
+        this.source = newSource;
+    }
+
+    public void setDestination(String newDestination) {
+        this.destination = newDestination;
+    }
+
+    public void setSeats(List<Boolean> newSeats) {
+        this.seats = newSeats;
+    }
+
+    public void setTrainName(String newTrainName) {
+        this.trainName = newTrainName;
+    }
+
+    public void setDateOfTravel(String newDateOfTravel) {
+        this.dateOfTravel = newDateOfTravel;
+    }
+
+    public void setTrain(Train newTrain) {
+        this.train = newTrain;
+    }
+
+    public void setUserId(String newUserId) {
+        this.userId = newUserId;
+    }
 
     public String getTicketInfo() {
         return String.format(
                 "This ticket belongs to %s for %s from %s to %s on %s",
-                userId, trainName, source, destination, dateOfTravel
-        );
+                userId, trainName, source, destination, dateOfTravel);
     }
 }

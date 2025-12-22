@@ -47,14 +47,15 @@ public class UserServices {
         Optional<User> userPresent = usersList
                 .stream().filter(currentUser -> currentUser.getName().equals(this.user.getName()) &&
                         UserServiceUtil.checkHashPassword(
-                                this.user.password(),
-                                currentUser.hashPasssord()))
+                                this.user.getPassword(),
+                                currentUser.getHashPasssord()))
                 .findFirst();
         return userPresent.isPresent();
     }
 
-    public  Boolean signUpUser(User currentUser) {
+    public Boolean signUpUser(User currentUser) {
         try {
+            System.out.println("THIS IS THE USER " + user.getName());
             usersList.add(currentUser);
             addUserToFileList();
             return Boolean.TRUE;
@@ -70,7 +71,7 @@ public class UserServices {
 
     public void cancelBooking(String ticketId) {
         try {
-            List<Ticket> newTicketBooked = this.user.ticketBooked()
+            List<Ticket> newTicketBooked = this.user.getTicketBooked()
                     .stream()
                     .filter(currentTicket -> !currentTicket.getTicketId().equals(ticketId))
                     .toList();

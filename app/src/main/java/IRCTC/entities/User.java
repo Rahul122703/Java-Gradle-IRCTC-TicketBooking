@@ -25,23 +25,23 @@ public class User {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
-    public String password() {
-        return this.password;
+    public String getPassword() {
+        return password;
     }
 
-    public String hashPasssord() {
-        return this.hashPasssord;
+    public String getHashPasssord() {
+        return hashPasssord;
     }
 
-    public List<Ticket> ticketBooked() {
-        return this.ticketBooked;
+    public List<Ticket> getTicketBooked() {
+        return ticketBooked;
     }
 
-    public String userId() {
-        return this.userId;
+    public String getUserId() {
+        return userId;
     }
 
     public void setName(String newName) {

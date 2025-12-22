@@ -16,7 +16,6 @@ public class Train {
     private Map<String, String> timing;
     private List<String> stations;
 
-    // ✅ REQUIRED by Jackson
     public Train() {
     }
 
