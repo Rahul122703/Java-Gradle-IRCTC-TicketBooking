@@ -9,6 +9,9 @@ public class User {
     private static List<Ticket> ticketBooked;
     private String userId;
 
+    public User() {
+    }
+
     public User(String user_name,
             String user_password,
             String user_hashPassword,
@@ -61,7 +64,7 @@ public class User {
         this.userId = newUserID;
     }
 
-    public static void printTickets() {
+    public void printTickets() {
         for (int i = 0; i < ticketBooked.size(); i++) {
             System.out.println(ticketBooked.get(i).getTicketInfo());
         }

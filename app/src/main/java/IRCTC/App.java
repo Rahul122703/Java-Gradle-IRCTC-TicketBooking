@@ -81,26 +81,33 @@ public class App {
                 }
 
                 case 2: {
-                    System.out.println("\n--- Create New Account ---");
-                    System.out.print("Choose Username: ");
-                    String username = sc.next();
+                    try {
+                        System.out.println("\n--- Create New Account ---");
+                        System.out.print("Choose Username: ");
+                        String username = sc.next();
 
-                    System.out.print("Choose Password: ");
-                    String password = sc.next();
+                        System.out.print("Choose Password: ");
+                        String password = sc.next();
 
-                    User newUser = new User(
-                            username,
-                            password,
-                            UserServiceUtil.hashPassword(password),
-                            new ArrayList<>(),
-                            UUID.randomUUID().toString());
+                        User newUser = new User(
+                                username,
+                                password,
+                                UserServiceUtil.hashPassword(password),
+                                new ArrayList<>(),
+                                UUID.randomUUID().toString());
 
-                    boolean signupStatus = UserServices.signUpUser(newUser);
+                        UserServices newUserData = new UserServices(newUser);
+                        boolean signupStatus = newUserData.signUpUser(newUser);
 
-                    if (signupStatus) {
-                        System.out.println("Account created successfully. Please login.");
-                    } else {
-                        System.out.println("Signup failed. Try again.");
+                        if (signupStatus) {
+                            System.out.println("Account created successfully. Please login.");
+                        } else {
+                            System.out.println("Signup failed. Try again.");
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println("System error while creating account.");
+                        e.printStackTrace();
                     }
                     break;
                 }

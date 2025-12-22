@@ -19,17 +19,22 @@ public class UserServices {
     private static List<User> usersList;
 
     public UserServices(User user1) throws Exception { // Constructor
-        this.user = user1;
         loadAllUsers();
+        this.user = user1;
+    }
+
+    public static List<User> getAllUsers() {
+        return usersList;
     }
 
     public UserServices() throws IOException {
         loadAllUsers();
     }
 
-    public static List<User> loadAllUsers() throws IOException {
+    public static void loadAllUsers() throws IOException {
+        System.out.println("users are loading");
         File Allusers = new File(USER_PATH);
-        return OM.readValue(Allusers, new TypeReference<List<User>>() {
+        usersList = OM.readValue(Allusers, new TypeReference<List<User>>() {
         });
     }
 
@@ -48,12 +53,13 @@ public class UserServices {
         return userPresent.isPresent();
     }
 
-    public static Boolean signUpUser(User currentUser) {
+    public  Boolean signUpUser(User currentUser) {
         try {
             usersList.add(currentUser);
             addUserToFileList();
             return Boolean.TRUE;
         } catch (Exception e) {
+            System.out.println(e);
             return Boolean.FALSE;
         }
     }
@@ -75,9 +81,11 @@ public class UserServices {
             e.printStackTrace();
         }
     }
+
     public static int[] countStations() {
         return TrainServices.stationCountArray();
     }
+
     public static List<Train> searchTrains(String source, String destination) {
         return TrainServices.availableTrains(source, destination);
     }
