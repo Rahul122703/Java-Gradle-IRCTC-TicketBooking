@@ -14,10 +14,29 @@
     "timing": {
       "gorakhpur": "21:30:00",
       "kushinagar": "22:20:00",
-      "lucknow": "06:10:00",
+      "deoria": "23:10:00",
+      "ballia": "00:30:00",
+      "ghazipur": "01:45:00",
+      "varanasi": "03:15:00",
+      "prayagraj": "05:45:00",
+      "kanpur": "09:10:00",
+      "aligarh": "12:30:00",
       "delhi": "14:45:00"
-    }
+    },
+    "stations": [
+      "gorakhpur",
+      "kushinagar",
+      "deoria",
+      "ballia",
+      "ghazipur",
+      "varanasi",
+      "prayagraj",
+      "kanpur",
+      "aligarh",
+      "delhi"
+    ]
   },
+
   {
     "name": "Kushinagar Express",
     "trainId": "ksnExp02",
@@ -33,9 +52,102 @@
     "timing": {
       "gorakhpur": "18:10:00",
       "kushinagar": "19:00:00",
+      "maharajganj": "20:10:00",
+      "padrauna": "21:30:00",
       "varanasi": "22:40:00",
+      "mirzapur": "00:05:00",
       "prayagraj": "02:15:00",
+      "kanpur": "06:00:00",
+      "ghaziabad": "09:15:00",
       "delhi": "10:30:00"
-    }
+    },
+    "stations": [
+      "gorakhpur",
+      "kushinagar",
+      "maharajganj",
+      "padrauna",
+      "varanasi",
+      "mirzapur",
+      "prayagraj",
+      "kanpur",
+      "ghaziabad",
+      "delhi"
+    ]
+  },
+
+  {
+    "name": "Varanasi राजधानी Express",
+    "trainId": "vnsRaj03",
+    "trainNo": "12423",
+    "departTime": "16:00:00",
+    "arrivalTime": "08:15:00",
+    "seats": [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "timing": {
+      "varanasi": "16:00:00",
+      "ptdd": "16:45:00",
+      "prayagraj": "17:30:00",
+      "kanpur": "21:15:00",
+      "etawah": "23:10:00",
+      "agra": "01:00:00",
+      "mathura": "02:30:00",
+      "faridabad": "06:30:00",
+      "ghaziabad": "07:45:00",
+      "delhi": "08:15:00"
+    },
+    "stations": [
+      "varanasi",
+      "ptdd",
+      "prayagraj",
+      "kanpur",
+      "etawah",
+      "agra",
+      "mathura",
+      "faridabad",
+      "ghaziabad",
+      "delhi"
+    ]
+  },
+
+  {
+    "name": "Lucknow Intercity",
+    "trainId": "lkoInt04",
+    "trainNo": "14203",
+    "departTime": "05:45:00",
+    "arrivalTime": "14:20:00",
+    "seats": [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "timing": {
+      "lucknow": "05:45:00",
+      "barabanki": "06:30:00",
+      "sultanpur": "08:00:00",
+      "pratapgarh": "09:15:00",
+      "prayagraj": "10:45:00",
+      "fatehpur": "11:50:00",
+      "kanpur": "12:30:00",
+      "etawah": "13:20:00",
+      "tundla": "13:50:00",
+      "agra": "14:20:00"
+    },
+    "stations": [
+      "lucknow",
+      "barabanki",
+      "sultanpur",
+      "pratapgarh",
+      "prayagraj",
+      "fatehpur",
+      "kanpur",
+      "etawah",
+      "tundla",
+      "agra"
+    ]
   }
 ]

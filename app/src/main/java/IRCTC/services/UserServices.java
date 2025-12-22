@@ -10,12 +10,12 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
+import IRCTC.entities.Train;
 
 public class UserServices {
     private User user;
     public static final ObjectMapper OM = new ObjectMapper();
-    private static final String USER_PATH = "./localDB/users.json";
+    private static final String USER_PATH = "D:\\RahulSharma\\Learn\\Java\\IRCTC\\app\\src\\main\\java\\IRCTC\\localDB\\users.json";
     private static List<User> usersList;
 
     public UserServices(User user1) throws Exception { // Constructor
@@ -23,7 +23,7 @@ public class UserServices {
         loadAllUsers();
     }
 
-    public UserServices() throws IOException{
+    public UserServices() throws IOException {
         loadAllUsers();
     }
 
@@ -74,6 +74,12 @@ public class UserServices {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static int[] countStations() {
+        return TrainServices.stationCountArray();
+    }
+    public static List<Train> searchTrains(String source, String destination) {
+        return TrainServices.availableTrains(source, destination);
     }
 
 }

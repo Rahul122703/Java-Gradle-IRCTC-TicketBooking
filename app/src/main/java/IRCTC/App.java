@@ -1,116 +1,164 @@
 package IRCTC;
 
 import IRCTC.entities.User;
+import IRCTC.services.TrainServices;
 import IRCTC.services.UserServices;
 import IRCTC.utils.UserServiceUtil;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class App {
+
     public static void main(String[] args) {
-        System.out.println("---------TICKET BOOKING APP-----------");
+
+        System.out.println("--------- TICKET BOOKING APP ---------");
+
         Scanner sc = new Scanner(System.in);
-        int option = sc.nextInt();
 
+        // UserServices userServices = null;
+        UserServices userServices = null;
+        User loggedInUser = null;
         try {
-            UserServices userServicesObject = new UserServices();
-
+            TrainServices.setTrains();
         } catch (Exception e) {
-            System.out.println("THERE WAS SOME ERROR PLZ TRY AGAIN LATER");
+            System.out.println("Error initializing train services." + e.getMessage());
+            return;
         }
+        int choice = 0;
 
-        while (option != 7) {
+        while (choice != 8) {
 
             System.out.println("\n======================================");
             System.out.println("        WELCOME TO IRCTC APP");
             System.out.println("======================================");
-            System.out.println("Please choose an option (1–7):\n");
-
             System.out.println("1. Login User");
             System.out.println("2. Sign Up User");
             System.out.println("3. Book a Seat");
             System.out.println("4. View My Bookings");
             System.out.println("5. Search Trains");
             System.out.println("6. Cancel Booking");
-            System.out.println("7. Exit Application");
+            System.out.println("7. Print All trains");
 
+            System.out.println("8. Exit Application");
             System.out.println("======================================");
             System.out.print("Enter your choice: ");
 
-            int choice = sc.nextInt();
-
-            System.out.println("\nYou selected option: " + choice);
-
-            sc.close();
+            choice = sc.nextInt();
 
             switch (choice) {
-                case 1:
+
+                case 1: {
                     System.out.println("\n--- Login to Your Account ---");
                     System.out.print("Username: ");
-                    String login_userName = sc.next();
+                    String username = sc.next();
+
                     System.out.print("Password: ");
-                    String login_uuserPassword = sc.next();
-                    User login_newUser = new User(
-                            login_userName,
-                            login_uuserPassword,
-                            UserServiceUtil.hashPassword(login_uuserPassword),
+                    String password = sc.next();
+
+                    User tempUser = new User(
+                            username,
+                            password,
+                            UserServiceUtil.hashPassword(password),
                             new ArrayList<>(),
                             UUID.randomUUID().toString());
+
                     try {
-                        UserServices userServices = new UserServices(login_newUser);
-                        Boolean loginStatus = userServices.loginUser();
+                        userServices = new UserServices(tempUser);
+                        boolean loginStatus = userServices.loginUser();
+
                         if (loginStatus) {
-                            System.out.println("Login Sucessful!! + Welcome back" + login_userName);
+                            loggedInUser = tempUser;
+                            System.out.println("Login Successful! Welcome " + username);
                         } else {
-                            System.out.println(
-                                    "Login Failed!! + Invalid Credentials or " + login_userName + " dosen't exist");
+                            System.out.println("Login Failed! Invalid credentials.");
+                            userServices = null;
                         }
+
                     } catch (Exception e) {
-                        System.out.println("There was some error please try again later");
+                        System.out.println("Login error. Please try again.");
                     }
-                case 2:
-                    System.out.println("Sign Up User selected");
-                    System.out.print("Username: ");
-                    String userName = sc.next();
-                    System.out.print("Password: ");
-                    String userPassword = sc.next();
+                    break;
+                }
+
+                case 2: {
+                    System.out.println("\n--- Create New Account ---");
+                    System.out.print("Choose Username: ");
+                    String username = sc.next();
+
+                    System.out.print("Choose Password: ");
+                    String password = sc.next();
+
                     User newUser = new User(
-                            userName,
-                            userPassword,
-                            UserServiceUtil.hashPassword(userPassword),
+                            username,
+                            password,
+                            UserServiceUtil.hashPassword(password),
                             new ArrayList<>(),
                             UUID.randomUUID().toString());
-                    UserServices.signUpUser(newUser);
-                    System.out.println("\nLogin request submitted successfully.");
-                    System.out.println("Please wait while we verify your credentials...");
+
+                    boolean signupStatus = UserServices.signUpUser(newUser);
+
+                    if (signupStatus) {
+                        System.out.println("Account created successfully. Please login.");
+                    } else {
+                        System.out.println("Signup failed. Try again.");
+                    }
                     break;
+                }
 
                 case 3:
+                    if (loggedInUser == null) {
+                        System.out.println("Please login first.");
+                        break;
+                    }
                     System.out.println("Book a Seat selected");
                     break;
 
                 case 4:
-                    System.out.println("View My Bookings selected");
+                    if (loggedInUser == null || userServices == null) {
+                        System.out.println("Please login first.");
+                        break;
+                    }
+                    userServices.fetchBookings();
                     break;
 
                 case 5:
-                    System.out.println("Search Trains selected");
+                    System.out.println("\n==================== TRAIN SEARCH ====================");
+                    System.out.print("Enter Source Station      : ");
+                    String source = sc.next();
+
+                    System.out.print("Enter Destination Station : ");
+                    String destination = sc.next();
+
+                    System.out.println("\n--------------- Available Trains ----------------");
+                    System.out.println(UserServices.searchTrains(source, destination));
+                    System.out.println("--------------------------------------------------");
                     break;
 
                 case 6:
-                    System.out.println("Cancel Booking selected");
+                    if (loggedInUser == null || userServices == null) {
+                        System.out.println("Please login first.");
+                        break;
+                    }
+                    System.out.print("Enter Ticket ID to cancel: ");
+                    String ticketId = sc.next();
+                    userServices.cancelBooking(ticketId);
+                    System.out.println("Booking cancelled (if ticket existed).");
                     break;
 
                 case 7:
+                    System.out.println("-------------------PRINTING ALL TRAINS--------------------");
+                    TrainServices.printAllTrains();
+                    break;
+
+                case 8:
                     System.out.println("Exiting application...");
                     break;
 
                 default:
-                    System.out.println("Invalid choice! Please select between 1 and 7.");
+                    System.out.println("Invalid choice. Please select 1–7.");
             }
-
         }
+
+        sc.close();
     }
 }
