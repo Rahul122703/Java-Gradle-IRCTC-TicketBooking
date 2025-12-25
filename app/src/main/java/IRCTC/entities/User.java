@@ -2,11 +2,13 @@ package IRCTC.entities;
 
 import java.util.*;
 
+import IRCTC.services.UserServices;
+
 public class User {
     private String name;
     private String password;
     private String hashPasssord;
-    private static List<Ticket> ticketBooked;
+    private List<Ticket> ticketBooked;
     private String userId;
 
     public User() {

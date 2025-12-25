@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../.."
+		},
+		{
+			"path": "../../../../../../../../MondayMeetTask/sports-2026-demo"
+		}
+	],
+	"settings": {
+		"java.compile.nullAnalysis.mode": "automatic",
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"postman.settings.dotenv-detection-notification-visibility": false
+	}
+}

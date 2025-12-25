@@ -13,12 +13,12 @@ import java.util.Optional;
 import IRCTC.entities.Train;
 
 public class UserServices {
-    private User user;
+    private static User user;
     public static final ObjectMapper OM = new ObjectMapper();
-    private static final String USER_PATH = "D:\\RahulSharma\\Learn\\Java\\IRCTC\\app\\src\\main\\java\\IRCTC\\localDB\\users.json";
+    public static final String USER_PATH = "D:\\RahulSharma\\Learn\\Java\\IRCTC\\app\\src\\main\\java\\IRCTC\\localDB\\users.json";
     private static List<User> usersList;
 
-    public UserServices(User user1) throws Exception { // Constructor
+    public UserServices(User user1) throws Exception {
         loadAllUsers();
         this.user = user1;
     }
@@ -27,30 +27,34 @@ public class UserServices {
         return usersList;
     }
 
+    public static User getCurrentUser() {
+        return user;
+    }
+
     public UserServices() throws IOException {
         loadAllUsers();
     }
 
     public static void loadAllUsers() throws IOException {
-        System.out.println("users are loading");
         File Allusers = new File(USER_PATH);
         usersList = OM.readValue(Allusers, new TypeReference<List<User>>() {
         });
     }
 
-    private static void addUserToFileList() throws IOException {
+    public static void addUserToFileList() throws IOException {
         File usersFile = new File(USER_PATH);
         OM.writeValue(usersFile, usersList);
     }
 
-    public Boolean loginUser() {
-        Optional<User> userPresent = usersList
-                .stream().filter(currentUser -> currentUser.getName().equals(this.user.getName()) &&
+    public User loginUser() {
+        Optional<User> userPresent = usersList.stream()
+                .filter(u -> u.getName().equals(user.getName()) &&
                         UserServiceUtil.checkHashPassword(
-                                this.user.getPassword(),
-                                currentUser.getHashPasssord()))
+                                user.getPassword(),
+                                u.getHashPasssord()))
                 .findFirst();
-        return userPresent.isPresent();
+
+        return userPresent.orElse(null);
     }
 
     public Boolean signUpUser(User currentUser) {

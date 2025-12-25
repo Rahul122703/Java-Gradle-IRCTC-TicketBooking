@@ -1,108 +1,133 @@
 [
   {
-    "name": "Gorakhpur Express",
-    "trainId": "gkpExp01",
-    "trainNo": "15017",
-    "departTime": "21:30:00",
-    "arrivalTime": "14:45:00",
+    "name": "Purvanchal Superfast",
+    "trainId": "pvnSf05",
+    "trainNo": "22435",
+    "departTime": "20:00:00",
+    "arrivalTime": "11:40:00",
     "seats": [
-      [0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0]
     ],
     "timing": {
-      "gorakhpur": "21:30:00",
-      "kushinagar": "22:20:00",
-      "deoria": "23:10:00",
-      "ballia": "00:30:00",
-      "ghazipur": "01:45:00",
-      "varanasi": "03:15:00",
-      "prayagraj": "05:45:00",
-      "kanpur": "09:10:00",
-      "aligarh": "12:30:00",
-      "delhi": "14:45:00"
+      "gorakhpur": "20:00:00",
+      "deoria": "20:45:00",
+      "ballia": "21:50:00",
+      "varanasi": "23:30:00",
+      "prayagraj": "02:10:00",
+      "kanpur": "05:30:00",
+      "etawah": "07:20:00",
+      "agra": "09:00:00",
+      "delhi": "11:40:00"
     },
+    "trainInfo": "Train ID : pvnSf05 | Train No : 22435",
     "stations": [
       "gorakhpur",
-      "kushinagar",
       "deoria",
       "ballia",
-      "ghazipur",
       "varanasi",
       "prayagraj",
       "kanpur",
-      "aligarh",
+      "etawah",
+      "agra",
       "delhi"
     ]
   },
-
   {
-    "name": "Kushinagar Express",
-    "trainId": "ksnExp02",
-    "trainNo": "22537",
-    "departTime": "18:10:00",
-    "arrivalTime": "10:30:00",
+    "name": "Doab Link Express",
+    "trainId": "doabLn06",
+    "trainNo": "14589",
+    "departTime": "06:30:00",
+    "arrivalTime": "18:15:00",
     "seats": [
-      [0, 0, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0]
     ],
     "timing": {
-      "gorakhpur": "18:10:00",
-      "kushinagar": "19:00:00",
-      "maharajganj": "20:10:00",
-      "padrauna": "21:30:00",
-      "varanasi": "22:40:00",
-      "mirzapur": "00:05:00",
-      "prayagraj": "02:15:00",
-      "kanpur": "06:00:00",
-      "ghaziabad": "09:15:00",
-      "delhi": "10:30:00"
+      "mathura": "06:30:00",
+      "agra": "07:30:00",
+      "tundla": "08:10:00",
+      "etawah": "09:40:00",
+      "kanpur": "11:20:00",
+      "fatehpur": "12:10:00",
+      "prayagraj": "14:00:00",
+      "ptdd": "15:10:00",
+      "varanasi": "18:15:00"
     },
+    "trainInfo": "Train ID : doabLn06 | Train No : 14589",
     "stations": [
-      "gorakhpur",
-      "kushinagar",
-      "maharajganj",
-      "padrauna",
-      "varanasi",
-      "mirzapur",
-      "prayagraj",
+      "mathura",
+      "agra",
+      "tundla",
+      "etawah",
       "kanpur",
-      "ghaziabad",
-      "delhi"
-    ]
-  },
-
-  {
-    "name": "Varanasi राजधानी Express",
-    "trainId": "vnsRaj03",
-    "trainNo": "12423",
-    "departTime": "16:00:00",
-    "arrivalTime": "08:15:00",
-    "seats": [
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0, 0]
-    ],
-    "timing": {
-      "varanasi": "16:00:00",
-      "ptdd": "16:45:00",
-      "prayagraj": "17:30:00",
-      "kanpur": "21:15:00",
-      "etawah": "23:10:00",
-      "agra": "01:00:00",
-      "mathura": "02:30:00",
-      "faridabad": "06:30:00",
-      "ghaziabad": "07:45:00",
-      "delhi": "08:15:00"
-    },
-    "stations": [
-      "varanasi",
+      "fatehpur",
+      "prayagraj",
       "ptdd",
+      "varanasi"
+    ]
+  },
+  {
+    "name": "Awadh Connector",
+    "trainId": "awdCon07",
+    "trainNo": "15321",
+    "departTime": "04:50:00",
+    "arrivalTime": "16:30:00",
+    "seats": [
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "timing": {
+      "lucknow": "04:50:00",
+      "barabanki": "05:35:00",
+      "sultanpur": "07:10:00",
+      "pratapgarh": "08:20:00",
+      "prayagraj": "10:00:00",
+      "ptdd": "11:00:00",
+      "mirzapur": "13:15:00",
+      "varanasi": "16:30:00"
+    },
+    "trainInfo": "Train ID : awdCon07 | Train No : 15321",
+    "stations": [
+      "lucknow",
+      "barabanki",
+      "sultanpur",
+      "pratapgarh",
       "prayagraj",
+      "ptdd",
+      "mirzapur",
+      "varanasi"
+    ]
+  },
+  {
+    "name": "Capital Corridor Express",
+    "trainId": "capCor08",
+    "trainNo": "12877",
+    "departTime": "22:15:00",
+    "arrivalTime": "07:55:00",
+    "seats": [
+      [1, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0]
+    ],
+    "timing": {
+      "kanpur": "22:15:00",
+      "etawah": "23:50:00",
+      "agra": "01:30:00",
+      "mathura": "02:20:00",
+      "faridabad": "05:45:00",
+      "ghaziabad": "07:00:00",
+      "delhi": "07:55:00"
+    },
+    "trainInfo": "Train ID : capCor08 | Train No : 12877",
+    "stations": [
       "kanpur",
       "etawah",
       "agra",
@@ -112,13 +137,12 @@
       "delhi"
     ]
   },
-
   {
-    "name": "Lucknow Intercity",
-    "trainId": "lkoInt04",
-    "trainNo": "14203",
-    "departTime": "05:45:00",
-    "arrivalTime": "14:20:00",
+    "name": "Midway Junction Express",
+    "trainId": "midJxn09",
+    "trainNo": "19041",
+    "departTime": "09:00:00",
+    "arrivalTime": "20:40:00",
     "seats": [
       [0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0],
@@ -126,28 +150,25 @@
       [0, 0, 0, 0, 0, 0]
     ],
     "timing": {
-      "lucknow": "05:45:00",
-      "barabanki": "06:30:00",
-      "sultanpur": "08:00:00",
-      "pratapgarh": "09:15:00",
-      "prayagraj": "10:45:00",
-      "fatehpur": "11:50:00",
-      "kanpur": "12:30:00",
-      "etawah": "13:20:00",
-      "tundla": "13:50:00",
-      "agra": "14:20:00"
+      "padrauna": "09:00:00",
+      "kushinagar": "09:45:00",
+      "deoria": "10:30:00",
+      "ballia": "12:00:00",
+      "ghazipur": "13:30:00",
+      "varanasi": "15:15:00",
+      "prayagraj": "18:00:00",
+      "kanpur": "20:40:00"
     },
+    "trainInfo": "Train ID : midJxn09 | Train No : 19041",
     "stations": [
-      "lucknow",
-      "barabanki",
-      "sultanpur",
-      "pratapgarh",
+      "padrauna",
+      "kushinagar",
+      "deoria",
+      "ballia",
+      "ghazipur",
+      "varanasi",
       "prayagraj",
-      "fatehpur",
-      "kanpur",
-      "etawah",
-      "tundla",
-      "agra"
+      "kanpur"
     ]
   }
 ]

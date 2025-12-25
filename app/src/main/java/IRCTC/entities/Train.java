@@ -15,6 +15,7 @@ public class Train {
     private List<List<Integer>> seats;
     private Map<String, String> timing;
     private List<String> stations;
+    private String trainInfo;
 
     public Train() {
     }
@@ -27,7 +28,8 @@ public class Train {
             String train_arrivalTime,
             List<List<Integer>> train_seats,
             Map<String, String> train_timing,
-            List<String> train_stations) {
+            List<String> train_stations,
+            String train_info) {
 
         this.name = train_name;
         this.trainId = train_trainId;
@@ -37,6 +39,7 @@ public class Train {
         this.seats = train_seats;
         this.timing = train_timing;
         this.stations = train_stations;
+        this.trainInfo = train_info;
     }
 
     public String getName() {

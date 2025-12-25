@@ -3,6 +3,7 @@ package IRCTC;
 import IRCTC.entities.Ticket;
 import IRCTC.entities.User;
 import IRCTC.entities.Train;
+import IRCTC.services.TicketServices;
 import IRCTC.services.TrainServices;
 import IRCTC.services.UserServices;
 import IRCTC.utils.UserServiceUtil;
@@ -60,7 +61,7 @@ public class App {
 
             switch (choice) {
 
-                case 1 -> {
+                case 1 -> { // Login
                     clearScreen();
                     System.out.println("--- Login to Your Account ---");
 
@@ -73,27 +74,29 @@ public class App {
                     User tempUser = new User(
                             username,
                             password,
-                            UserServiceUtil.hashPassword(password),
+                            null,
                             new ArrayList<>(),
-                            UUID.randomUUID().toString());
+                            null);
 
                     try {
                         userServices = new UserServices(tempUser);
-                        if (userServices.loginUser()) {
-                            loggedInUser = tempUser;
-                            System.out.println("\nLogin successful. Welcome " + username);
+                        User realUser = userServices.loginUser();
+
+                        if (realUser != null) {
+                            loggedInUser = realUser;
+                            System.out.println("Login successful");
                         } else {
                             userServices = null;
-                            System.out.println("\nInvalid credentials.");
+                            System.out.println("Invalid credentials");
                         }
                     } catch (Exception e) {
-                        System.out.println("\nLogin error.");
+                        System.out.println("Login error.");
                     }
 
                     waitForEnter(sc);
                 }
 
-                case 2 -> {
+                case 2 -> { // Signup
                     clearScreen();
                     System.out.println("--- Create New Account ---");
 
@@ -113,40 +116,25 @@ public class App {
                     try {
                         UserServices us = new UserServices(newUser);
                         if (us.signUpUser(newUser)) {
-                            System.out.println("\nAccount created successfully.");
+                            System.out.println("Account created successfully.");
                         } else {
-                            System.out.println("\nSignup failed.");
+                            System.out.println("Signup failed.");
                         }
                     } catch (Exception e) {
-                        System.out.println("\nSystem error.");
+                        System.out.println("System error.");
                     }
 
                     waitForEnter(sc);
                 }
 
-                case 3 -> {
+                case 3 -> { // Book a seat
                     clearScreen();
+
                     if (loggedInUser == null) {
                         System.out.println("Please login first.");
-                    } else {
-                        System.out.println("Book seat feature coming soon.");
+                        waitForEnter(sc);
+                        break;
                     }
-                    waitForEnter(sc);
-                }
-
-                case 4 -> {
-                    clearScreen();
-                    if (loggedInUser == null || userServices == null) {
-                        System.out.println("Please login first.");
-                    } else {
-                        userServices.fetchBookings();
-                    }
-                    waitForEnter(sc);
-                }
-
-                case 5 -> {
-                    clearScreen();
-                    System.out.println("=== TRAIN SEARCH ===");
 
                     System.out.print("Enter Source Station: ");
                     String source = sc.next();
@@ -157,7 +145,83 @@ public class App {
                     List<Train> trains = UserServices.searchTrains(source, destination);
 
                     if (trains.isEmpty()) {
-                        System.out.println("\nNo trains found.");
+                        System.out.println("No trains found.");
+                        waitForEnter(sc);
+                        break;
+                    }
+
+                    int option = 1;
+                    for (Train train : trains) {
+                        System.out.println("--------------------------------------------");
+                        System.out.println("Option -> " + option++);
+                        System.out.println("Train Name  : " + train.getName());
+                        System.out.println("Train No    : " + train.getTrainNo());
+                        System.out.println("Source      : " + source + " -> " + train.getTiming().get(source));
+                        System.out.println(
+                                "Destination : " + destination + " -> " + train.getTiming().get(destination));
+                        System.out.println("--------------------------------------------");
+                    }
+                    System.out.print("Choose train option: ");
+                    int trainOption = sc.nextInt();
+
+                    System.out.print("Number of seats: ");
+                    int seats = sc.nextInt();
+
+                    Train chosenTrain = trains.get(trainOption - 1);
+
+                    if (TicketServices.checkSeatAvaliablity(chosenTrain, seats)) {
+
+                        Ticket ticket = new Ticket(
+                                UUID.randomUUID().toString(),
+                                chosenTrain.getTrainNo(),
+                                source,
+                                destination,
+                                seats,
+                                chosenTrain.getName(),
+                                chosenTrain.getTiming().get(source),
+                                chosenTrain,
+                                loggedInUser.getUserId(),
+                                "");
+
+                        TicketServices.bookSeats(
+                                chosenTrain.getTrainId(),
+                                loggedInUser.getUserId(),
+                                ticket,
+                                seats);
+
+                        System.out.println("Ticket booked successfully.");
+                    } else {
+                        System.out.println("Not enough seats available.");
+                    }
+
+                    waitForEnter(sc);
+                }
+
+                case 4 -> { // View bookings
+                    clearScreen();
+
+                    if (loggedInUser == null) {
+                        System.out.println("Please login first.");
+                    } else {
+                        loggedInUser.printTickets();
+                    }
+
+                    waitForEnter(sc);
+                }
+
+                case 5 -> { // Train search
+                    clearScreen();
+
+                    System.out.print("Enter Source Station: ");
+                    String source = sc.next();
+
+                    System.out.print("Enter Destination Station: ");
+                    String destination = sc.next();
+
+                    List<Train> trains = UserServices.searchTrains(source, destination);
+
+                    if (trains.isEmpty()) {
+                        System.out.println("No trains found.");
                     } else {
                         for (Train train : trains) {
                             System.out.println("--------------------------------------------");
@@ -173,20 +237,8 @@ public class App {
                     waitForEnter(sc);
                 }
 
-                case 6 -> {
-                    clearScreen();
-                    if (loggedInUser == null || userServices == null) {
-                        System.out.println("Please login first.");
-                    } else {
-                        System.out.print("Enter Ticket ID: ");
-                        String ticketId = sc.next();
-                        userServices.cancelBooking(ticketId);
-                        System.out.println("\nTicket cancelled if it existed.");
-                    }
-                    waitForEnter(sc);
-                }
-
-                case 7 -> {
+                
+                case 7 -> { // Print all trains
                     clearScreen();
                     TrainServices.printAllTrains();
                     waitForEnter(sc);

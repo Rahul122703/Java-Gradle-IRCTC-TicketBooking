@@ -8,18 +8,24 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.IOException;
 
 public class TrainServices {
     static List<Train> allTrains;
+    private static final String TRAIN_PATH = "D:\\RahulSharma\\Learn\\Java\\IRCTC\\app\\src\\main\\java\\IRCTC\\localDB\\trains.json";
 
     public static void setTrains() throws Exception {
-
-        String TRAIN_PATH = "D:\\RahulSharma\\Learn\\Java\\IRCTC\\app\\src\\main\\java\\IRCTC\\localDB\\trains.json";
         File TrainsFile = new File(TRAIN_PATH);
         ObjectMapper OM = new ObjectMapper();
         allTrains = OM.readValue(TrainsFile, new TypeReference<List<Train>>() {
         });
+    }
 
+    public static void setNewTrainData() throws IOException {
+        System.err.println("Yes this is running");
+        File trainsFilePath = new File(TRAIN_PATH);
+        ObjectMapper OM = new ObjectMapper();
+        OM.writeValue(trainsFilePath, allTrains);
     }
 
     public static List<Train> getallTrains() {
@@ -30,7 +36,6 @@ public class TrainServices {
         return allTrains.stream()
                 .filter(train -> ValidTrain(train, source, destination))
                 .collect(Collectors.toList());
-
     }
 
     public static int[] stationCountArray() {

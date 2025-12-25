@@ -2,32 +2,34 @@ package IRCTC.entities;
 
 import java.util.List;
 
+import IRCTC.services.UserServices;
+
 public class Ticket {
     private String ticketId;
     private String trainNo;
     private String source;
     private String destination;
-    private List<Boolean> seats;
+    private int numberOfSeats;
     private String trainName;
     private String dateOfTravel;
     private Train train;
     private String userId;
+    private String ticketInfo;
 
     public Ticket(
             String ticket_ticketId,
             String ticket_trainNo,
             String ticket_source,
-            String ticket_destination,
-            List<Boolean> ticket_seats,
+            String ticket_destination, int numberOfSeats,
             String ticket_trainName,
             String ticket_dateOfTravel,
             Train ticket_train,
-            String ticket_userId) {
+            String ticket_userId,
+            String ticketInfo) {
         this.ticketId = ticket_ticketId;
         this.trainNo = ticket_trainNo;
         this.source = ticket_source;
         this.destination = ticket_destination;
-        this.seats = ticket_seats;
         this.trainName = ticket_trainName;
         this.dateOfTravel = ticket_dateOfTravel;
         this.train = ticket_train;
@@ -46,16 +48,16 @@ public class Ticket {
         return this.trainNo;
     }
 
+    public int getNumberOfSeats() {
+        return this.numberOfSeats;
+    }
+
     public String getSource() {
         return this.source;
     }
 
     public String getDestination() {
         return this.destination;
-    }
-
-    public List<Boolean> getSeats() {
-        return this.seats;
     }
 
     public String getTrainName() {
@@ -90,12 +92,12 @@ public class Ticket {
         this.destination = newDestination;
     }
 
-    public void setSeats(List<Boolean> newSeats) {
-        this.seats = newSeats;
-    }
-
     public void setTrainName(String newTrainName) {
         this.trainName = newTrainName;
+    }
+
+    public void setNumberOfSeats(int newNumberOfSeats) {
+        this.numberOfSeats = newNumberOfSeats;
     }
 
     public void setDateOfTravel(String newDateOfTravel) {
@@ -113,6 +115,6 @@ public class Ticket {
     public String getTicketInfo() {
         return String.format(
                 "This ticket belongs to %s for %s from %s to %s on %s",
-                userId, trainName, source, destination, dateOfTravel);
+                UserServices.getCurrentUser().getName(), trainName, source, destination, dateOfTravel);
     }
 }

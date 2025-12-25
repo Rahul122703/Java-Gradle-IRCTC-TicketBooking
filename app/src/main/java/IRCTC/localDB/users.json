@@ -1,1 +1,155 @@
-[{"name":"rahul","password":"rahul","hashPasssord":"$2a$10$dKXvgm2G0OOd2N5Qb9Iq1erk.pJpm1PL6Zm01Rk36Q2Nbjf./lRYG","userId":"d01fda6f-e1dc-492a-9cec-e7ed4d1a9623","ticketBooked":[]},{"name":"sharma","password":"sharma","hashPasssord":"$2a$10$Ib8l0oPMbimiHijIUyh76OI4YeQ2Pm8veK4yh2xvXVJ2RLdH6ESd.","userId":"d3c8da35-5d89-4895-b49e-fbbe0d7bf84e","ticketBooked":[]},{"name":"rs","password":"rs","hashPasssord":"$2a$10$uXfeMLVwzS3uAspgO81jjO6ZrXCjeKXgW6ze80rrXedireU.PJ6MW","userId":"cacbe88c-4e78-491a-8b17-f0d16752425f","ticketBooked":[]},{"name":"sharma","password":"sharma","hashPasssord":"$2a$10$dnsBU5.yGagDAvs4207ZjeA4kdLOXC3neSGKVlSZHVCCCGfauzWUa","userId":"6caa649e-160f-46dd-8745-7db09eaedd4e","ticketBooked":[]}]
+[
+  {
+    "name": "sharma",
+    "password": "sharma",
+    "hashPasssord": "$2a$10$26OUQOEb7PJ1TVpbUPYa6ed1Ag5p1HY/c9CKal7Qd1KTsVVdiOQW6",
+    "ticketBooked": [
+      {
+        "ticketId": "d7580ea9-a06d-40d7-8ba4-6b6be646b110",
+        "trainNo": "22435",
+        "source": "ballia",
+        "destination": "delhi",
+        "numberOfSeats": 0,
+        "trainName": "Purvanchal Superfast",
+        "dateOfTravel": "21:50:00",
+        "train": {
+          "name": "Purvanchal Superfast",
+          "trainId": "pvnSf05",
+          "trainNo": "22435",
+          "departTime": "20:00:00",
+          "arrivalTime": "11:40:00",
+          "seats": [
+            [1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+          ],
+          "timing": {
+            "gorakhpur": "20:00:00",
+            "deoria": "20:45:00",
+            "ballia": "21:50:00",
+            "varanasi": "23:30:00",
+            "prayagraj": "02:10:00",
+            "kanpur": "05:30:00",
+            "etawah": "07:20:00",
+            "agra": "09:00:00",
+            "delhi": "11:40:00"
+          },
+          "trainInfo": "Train ID : pvnSf05 | Train No : 22435",
+          "stations": [
+            "gorakhpur",
+            "deoria",
+            "ballia",
+            "varanasi",
+            "prayagraj",
+            "kanpur",
+            "etawah",
+            "agra",
+            "delhi"
+          ]
+        },
+        "userId": "29c7f8c1-be79-4d00-8828-e1e03c3654b0",
+        "ticketInfo": "This ticket belongs to rahul for Purvanchal Superfast from ballia to delhi on 21:50:00"
+      },
+      {
+        "ticketId": "93d667c2-36d5-4fe7-bfd7-8d5bfc14ba27",
+        "trainNo": "14589",
+        "source": "agra",
+        "destination": "kanpur",
+        "numberOfSeats": 0,
+        "trainName": "Doab Link Express",
+        "dateOfTravel": "07:30:00",
+        "train": {
+          "name": "Doab Link Express",
+          "trainId": "doabLn06",
+          "trainNo": "14589",
+          "departTime": "06:30:00",
+          "arrivalTime": "18:15:00",
+          "seats": [
+            [1, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+          ],
+          "timing": {
+            "mathura": "06:30:00",
+            "agra": "07:30:00",
+            "tundla": "08:10:00",
+            "etawah": "09:40:00",
+            "kanpur": "11:20:00",
+            "fatehpur": "12:10:00",
+            "prayagraj": "14:00:00",
+            "ptdd": "15:10:00",
+            "varanasi": "18:15:00"
+          },
+          "trainInfo": "Train ID : doabLn06 | Train No : 14589",
+          "stations": [
+            "mathura",
+            "agra",
+            "tundla",
+            "etawah",
+            "kanpur",
+            "fatehpur",
+            "prayagraj",
+            "ptdd",
+            "varanasi"
+          ]
+        },
+        "userId": "29c7f8c1-be79-4d00-8828-e1e03c3654b0",
+        "ticketInfo": "This ticket belongs to rahul for Doab Link Express from agra to kanpur on 07:30:00"
+      }
+    ],
+    "userId": "29c7f8c1-be79-4d00-8828-e1e03c3654b0"
+  },
+  {
+    "name": "rahul",
+    "password": "rahul",
+    "hashPasssord": "$2a$10$zivizOqMkVhWDEh8UvqQZOJDOyRpci.oK7HGPN5iiRhMlyw8FHmw6",
+    "ticketBooked": [
+      {
+        "ticketId": "52ca9067-8700-40d0-9aaa-4c73405a3d48",
+        "trainNo": "12877",
+        "source": "agra",
+        "destination": "mathura",
+        "numberOfSeats": 0,
+        "trainName": "Capital Corridor Express",
+        "dateOfTravel": "01:30:00",
+        "train": {
+          "name": "Capital Corridor Express",
+          "trainId": "capCor08",
+          "trainNo": "12877",
+          "departTime": "22:15:00",
+          "arrivalTime": "07:55:00",
+          "seats": [
+            [1, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0]
+          ],
+          "timing": {
+            "kanpur": "22:15:00",
+            "etawah": "23:50:00",
+            "agra": "01:30:00",
+            "mathura": "02:20:00",
+            "faridabad": "05:45:00",
+            "ghaziabad": "07:00:00",
+            "delhi": "07:55:00"
+          },
+          "trainInfo": "Train ID : capCor08 | Train No : 12877",
+          "stations": [
+            "kanpur",
+            "etawah",
+            "agra",
+            "mathura",
+            "faridabad",
+            "ghaziabad",
+            "delhi"
+          ]
+        },
+        "userId": "84143582-bba5-4432-9b8c-6042fe134dba",
+        "ticketInfo": "This ticket belongs to rahul for Capital Corridor Express from agra to mathura on 01:30:00"
+      }
+    ],
+    "userId": "84143582-bba5-4432-9b8c-6042fe134dba"
+  }
+]
