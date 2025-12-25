@@ -44,7 +44,10 @@ public class App {
             clearScreen();
 
             System.out.println("======================================");
-            System.out.println("        WELCOME TO IRCTC APP");
+            System.out.printf(
+                    "        WELCOME TO IRCTC APP %s%n",
+                    loggedInUser != null ? loggedInUser.getName() : "Not Logged In");
+            System.err.println();
             System.out.println("======================================");
             System.out.println("1. Login User");
             System.out.println("2. Sign Up User");
@@ -236,8 +239,12 @@ public class App {
 
                     waitForEnter(sc);
                 }
-
-                
+                case 6 -> { // Cancel Ticket
+                    System.out.println("Enter Ticket ID to Cancel the ticket");
+                    String ticketID = sc.next();
+                    userServices.cancelBooking(ticketID);
+                    waitForEnter(sc);
+                }
                 case 7 -> { // Print all trains
                     clearScreen();
                     TrainServices.printAllTrains();

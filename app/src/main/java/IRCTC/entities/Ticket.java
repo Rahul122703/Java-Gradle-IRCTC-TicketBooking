@@ -94,6 +94,7 @@ public class Ticket {
 
     public void setTrainName(String newTrainName) {
         this.trainName = newTrainName;
+
     }
 
     public void setNumberOfSeats(int newNumberOfSeats) {
@@ -114,7 +115,7 @@ public class Ticket {
 
     public String getTicketInfo() {
         return String.format(
-                "This ticket belongs to %s for %s from %s to %s on %s",
+                "This ticket (Ticket ID: %s) belongs to %s for %s from %s to %s on %s", ticketId,
                 UserServices.getCurrentUser().getName(), trainName, source, destination, dateOfTravel);
     }
 }

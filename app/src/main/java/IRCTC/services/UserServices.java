@@ -6,6 +6,8 @@ import IRCTC.utils.UserServiceUtil;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Ticker;
+
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +56,12 @@ public class UserServices {
                                 u.getHashPasssord()))
                 .findFirst();
 
-        return userPresent.orElse(null);
+        if (userPresent.isPresent()) {
+            this.user = userPresent.get(); 
+            return this.user;
+        }
+
+        return null;
     }
 
     public Boolean signUpUser(User currentUser) {
@@ -73,16 +80,49 @@ public class UserServices {
         this.user.printTickets();
     }
 
-    public void cancelBooking(String ticketId) {
-        try {
-            List<Ticket> newTicketBooked = this.user.getTicketBooked()
-                    .stream()
-                    .filter(currentTicket -> !currentTicket.getTicketId().equals(ticketId))
-                    .toList();
+    public void cancelBooking(String ticketId) { // here
+        System.out.print("ticketId : ");
+        System.out.println(ticketId);
+        Ticket ticketToCancel = null;
+        System.out.printf("USER TICKET SIZE ARRAY %d: ", this.user.getTicketBooked().size());
+        for (Ticket t : this.user.getTicketBooked()) {
+            System.out.println("CURRENT TICKET ID");
+            System.out.println(t.getTicketId());
+        }
+        for (Ticket t : this.user.getTicketBooked()) {
+            System.out.println(t.getTicketId());
+            if (t.getTicketId().equals(ticketId)) {
+                ticketToCancel = t;
+                break;
+            }
+        }
 
-            this.user.setTicketBooked(newTicketBooked);
-            addUserToFileList();
-        } catch (Exception e) {
+        if (ticketToCancel == null) {
+            System.out.println("No ticket found with this ID.");
+            return;
+        }
+        user.getTicketBooked().remove(ticketToCancel);
+        Train train = ticketToCancel.getTrain();
+        int seatsToFree = ticketToCancel.getNumberOfSeats();
+
+        int freed = 0;
+        for (List<Integer> row : train.getSeats()) {
+            for (int i = 0; i < row.size(); i++) {
+                if (row.get(i) == 1) {
+                    row.set(i, 0);
+                    freed++;
+                    if (freed == seatsToFree)
+                        break;
+                }
+            }
+            if (freed == seatsToFree)
+                break;
+        }
+        try {
+            UserServices.addUserToFileList();
+            TrainServices.setNewTrainData();
+            System.out.println("Ticket cancelled successfully.");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
